@@ -23,7 +23,7 @@ const store = applyMiddleware(
 const App = connect(
   state => ({ state }),
   dispatch => ({
-    actions: bindActionCreators(actionCreators, dispatch),
+    actions: bindActionCreators(actionCreators, dispatch), // 基于参数创建并触发action
   })
 )(Deskmark);
 

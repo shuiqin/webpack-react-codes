@@ -81,6 +81,10 @@ function user(state = initalUserState, action) {
   }
 }
 
+// 所有的state数据在redux中都存储在一个对象中
+// 将这两个函数合并在一起
+// 还是一个纯函数 只不过是返回一个对象 并且分别把两个函数的运行返回值包括进去
+// 每个函数只关心state的一部分, 当应用变得越来越复杂时 把不同reducer拆分到不同文件中
 const rootReducer = combineReducers({
   posts,
   user
@@ -90,14 +94,18 @@ const store = createStore(rootReducer);
 
 document.body.innerHTML += '<h2>初始化状态</h2>';
 
+// store通过getState()方法返回state只
 displayPage(store.getState());
 
+// store注册回调 监听state的变化
 store.subscribe(() => {
   displayPage(store.getState());
+  console.log(store.getState()); // 监听打印
 });
 
 // create two posts
 document.body.innerHTML += '<h2>创建两篇文章</h2>';
+// store可以通过dispatch方法执行action
 store.dispatch(createPost({ id: 1, title: 'new title' }));
 // store.dispatch({type: CREATE_POST, data: {id: 1, title: 'new title'}});
 store.dispatch(createPost({ id: 2, title: 'the second title' }));

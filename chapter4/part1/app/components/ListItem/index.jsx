@@ -1,7 +1,7 @@
 /*
  * @file component Item
  */
-
+// 无状态组件
 import React, { PropTypes } from 'react';
 
 const propTypes = {

@@ -8,4 +8,4 @@ const props = {
   name: 'viking',
   age: 20
 };
-render(<Profile {...props} />, ele);
+render(<Profile {...props} />, ele);// 使用reactDom把组件挂载到dom节点上

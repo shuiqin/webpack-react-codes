@@ -1,0 +1,53 @@
+var chai = require('chai');
+var expect = chai.expect;
+
+//moca用describe来描述一组测试内容
+describe('some simple tests', function(){
+  it('test equal', function(){//it方法来描述一个单独的测试用例
+    //测试相等
+    expect(4+5).to.equal(10);
+  })
+
+  it('test not equal', function(){//it方法来描述一个单独的测试用例
+    //测试相等
+    expect(4+5).to.not.equal(10);
+  })
+
+  it('test object equal', function(){//it方法来描述一个单独的测试用例
+    //测试对象相等 对象默认是 ===
+    expect({'name': 'viking'}).to.not.equal({'name': 'viking'});
+
+    //使用deep以后 不是比较引用 而是比较值是否一一相等
+    expect({'name': 'viking'}).to.deep.equal({'name': 'viking'});
+
+  })
+});
+
+//TODO 注 这个文件运行 npm run test报错
+/*
+mocha shuiqintest.js
+
+* shuiqins-MacBook-Pro:test shuiqin$ mocha shuiqintest.js
+
+
+ some simple tests
+ 1) test equal
+ ✓ test not equal
+ ✓ test object equal
+
+
+ 2 passing (15ms)
+ 1 failing
+
+ 1) some simple tests test equal:
+
+ AssertionError: expected 9 to equal 10
+ + expected - actual
+
+ -9
+ +10
+
+ at Context.<anonymous> (shuiqintest.js:8:20)
+
+
+ * */

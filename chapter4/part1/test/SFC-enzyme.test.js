@@ -24,12 +24,13 @@ describe("Testing all the SFC using enzyme", function() {
   ];
 
   it('test List component using Enzyme', () => {
-    let list = shallow(<List items={testData} />);
-    expect(list.find(ListItem).length).to.equal(testData.length);
+    let list = shallow(<List items={testData} />);//生成虚拟dom
+    expect(list.find(ListItem).length).to.equal(testData.length); //可以查找选择器或component本身
   })
   it('test ListItem component using Enzyme', () => {
     let listItem = shallow(<ListItem item={testData[0]} />);
     expect(listItem.childAt(1).text()).to.equal(testData[0].title);
+    expect(listItem.find('.item-title').text()).to.equal(testData[0].title);
     expect(listItem.hasClass('list-group-item')).to.be.true;
   })
   it('test ItemShowLayer with no data using Enzyme', () => {
@@ -56,11 +57,13 @@ describe("Testing all the SFC using enzyme", function() {
   })
   it('test Deskmark inital load with Enzyme', () => {
     let deskmark = shallow(<Deskmark/>);
-    expect(deskmark.find(CreateBar).length).to.equal(1);
+    expect(deskmark.find(CreateBar).length).to.equal(1);  // 
     expect(deskmark.find(ItemShowLayer).length).to.equal(1);
     expect(deskmark.find(ItemEditor).length).to.equal(0);
     expect(deskmark.find(List).length).to.equal(1);
   })
+
+  //以上未将虚拟dom挂载到真实dom  , mount实现挂载真实dom
   it('test Deskmark create one post and delete a post', () => {
     // I think it is hard to do the UI stuff with shallow render,
     // the dom-render is more reasonable and more clear
@@ -79,7 +82,7 @@ describe("Testing all the SFC using enzyme", function() {
     expect(deskmark.find('.item-component').length).to.equal(0);
     //set input and textarea
     let input = deskmark.find('input');
-    input.node.value = 'new title';
+    input.node.value = 'new title';  //模拟input输入之
     input.simulate('change', input);
     let textarea = deskmark.find('textarea');
     textarea.node.value = '#looks good';
@@ -103,3 +106,30 @@ describe("Testing all the SFC using enzyme", function() {
     expect(deskmark.find('.item-component').length).to.equal(0);
   })
 });
+
+/**
+ *
+ * eskmark@1.0.0 test /Users/shuiqin/Documents/workspace/app/myExperience/webpack-react-codes/chapter4/part1
+ > NODE_ENV=production mocha --compilers js:babel-core/register --require ignore-styles
+
+
+
+ Testing all the SFC using enzyme
+ ✓ test List component using Enzyme
+ ✓ test ListItem component using Enzyme
+ ✓ test ItemShowLayer with no data using Enzyme
+ ✓ test ItemShowLayer with data using Enzyme
+ ✓ test ItemEditor with no data using Enzyme
+ ✓ test ItemEditor with data using Enzyme
+ ✓ test Deskmark inital load with Enzyme
+ ✓ test Deskmark create one post and delete a post (53ms)   //real dom操作比较耗时
+
+ testing all stateless component
+ ✓ test List component
+ ✓ test ListItem component
+ ✓ test ItemShowLayer component with no data
+ ✓ test ItemShowLayer component with provided data
+
+
+ 12 passing (89ms)
+ * */

@@ -16,9 +16,11 @@ class Todo extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
   componentDidMount() {
-    TodoStore.addChangeListener(this.onChange);
+    // 组件刚初始化的时候监听store的change事件
+    TodoStore.addChangeListener(this.onChange); // 监听store触发的 change事件
   }
   componentWillUnmount() {
+    // 组件卸载的时候清楚该事件绑定
     TodoStore.removeChangeListener(this.onChange);
   }
   onChange() {

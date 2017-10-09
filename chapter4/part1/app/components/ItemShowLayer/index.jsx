@@ -24,7 +24,19 @@ function ItemShowLayer({ item, onEdit, onDelete }) {
     );
   }
 
-  const content = marked(item.content);
+  // 将markdown 转换成html
+  // 在渲染html代码是使用了描述过的jsx转义写法dangerouslySetInnerHTML
+  /*
+  * dangerouslySetInnerHTML
+   dangerouslySetInnerHTML is React’s replacement for using innerHTML
+   in the browser DOM. In general,
+   setting HTML from code is risky because it’s easy to inadvertently
+   expose your users to a cross-site scripting (XSS) attack.
+   So, you can set HTML directly from React, but you have to type out
+   dangerouslySetInnerHTML and pass an object with a __html key,
+   to remind yourself that it’s dangerous. For example:
+  * */
+  const content = marked(item.content);// markdown转化成html
 
   return (
     <div className="col-md-8 item-show-layer-component">

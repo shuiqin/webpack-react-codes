@@ -3,7 +3,7 @@ import Hobby from './Hobby';
 
 const propTypes = {
   name: PropTypes.string.isRequired,
-  age: PropTypes.number.isRequired
+  age: PropTypes.number.isRequired  // 组件属性验证
 };
 
 class Profile extends React.Component {
@@ -14,6 +14,8 @@ class Profile extends React.Component {
       hobbies: ['skateboarding', 'rock music']
     };
     this.likedCallback = this.likedCallback.bind(this);
+    // TODO 因为在es6 class类型的component组件声明中 不会把一些自定义的callback函数绑定到实例中 所以需要手动在constructor里绑定
+    // react并未把事件绑定在特定的dom节点上 实际是用事件代理的方式在最外层绑定一个事件回调 当组件unmounted的时候 事件回调会自动删除
     this.addHobbyCallback = this.addHobbyCallback.bind(this);
   }
 
@@ -33,7 +35,7 @@ class Profile extends React.Component {
   }
 
   addHobbyCallback() {
-    const hobbyInput = this.refs.hobby;
+    const hobbyInput = this.refs.hobby; // DOM操作
     const val = hobbyInput.value;
     if (val) {
       let hobbies = this.state.hobbies;
@@ -47,6 +49,7 @@ class Profile extends React.Component {
   }
 
   render() {
+    // 给每个循环组件添加一个唯一的key值
     return (
       <div>
         <h1>我的名字叫 {this.props.name}</h1>
@@ -64,6 +67,7 @@ class Profile extends React.Component {
   }
 }
 
+// 将验证附值给组件的propTypes属性
 Profile.propTypes = propTypes;
 
 export default Profile;

@@ -9,6 +9,8 @@ import CreateBar from '../CreateBar';
 import List from '../List';
 import ItemEditor from '../ItemEditor';
 import ItemShowLayer from '../ItemShowLayer';
+import Tile from '../tile-page/TilePage';
+
 
 import './style.scss';
 
@@ -23,6 +25,7 @@ export default class App extends React.Component {
       editing: false,
     };
 
+    // 需bind一下 es6 class不会自动绑定
     this.selectItem = this.selectItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
@@ -123,23 +126,27 @@ export default class App extends React.Component {
       );
 
     return (
-      <section className="deskmark-component">
-        <nav className="navbar navbar-fixed-top navbar-dark bg-inverse">
-          <a className="navbar-brand" href="#">Deskmark App</a>
-        </nav>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4 list-group">
-              <CreateBar onClick={this.createItem} />
-              <List
-                items={this.state.items}
-                onSelect={this.selectItem}
-              />
+      <div>
+        <Tile/>
+        <section className="deskmark-component">
+          <nav className="navbar navbar-fixed-top navbar-dark bg-inverse">
+            <a className="navbar-brand" href="#">Deskmark App</a>
+          </nav>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-4 list-group">
+                <CreateBar onClick={this.createItem} />
+                <List
+                  items={this.state.items}
+                  onSelect={this.selectItem}
+                />
+              </div>
+              {mainPart}
             </div>
-            {mainPart}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
+
     );
   }
 }

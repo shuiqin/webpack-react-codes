@@ -61,7 +61,7 @@ export function fetchEntry(id) {
 export function fetchEntryList() {
   return {
     type: FETCH_ENTRY_LIST,
-    payload: storage.getAll(),
+    payload: storage.getAll(), // 此处payload是一个promise
   };
 }
 

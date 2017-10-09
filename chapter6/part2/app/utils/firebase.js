@@ -3,7 +3,7 @@
  */
 
 const FIREBASE_SCRIPT_URL = 'https://cdn.firebase.com/js/client/2.2.1/firebase.js';
-const FIREBASE_DATA_URL = 'https://deskmark-demo.firebaseio.com/entries/';
+const FIREBASE_DATA_URL = 'https://deskmark-demo.firebaseio.com/entries/';  // TODO 无法访问
 
 export const FirebasePromise = new Promise((resolve, reject) => {
   const script = Object.assign(document.createElement('script'), {
